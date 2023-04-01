@@ -1,0 +1,14 @@
+a.out
+a.out.dSYM
+
+/* mac garbage */ 
+
+*.swp 
+
+/* vim */ 
+
+/* yacc */ 
+y.tab.c
+y.tab.h
+lex.yy.c
+
