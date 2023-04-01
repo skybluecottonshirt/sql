@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h> 
+#include "common.h"
 int yyerror( const char* ) ; 
 
 %}
@@ -10,9 +11,9 @@ int yyerror( const char* ) ;
 }
 
 %token SELECT FROM SEMICOLON NAME COMMA CREATE INSERT 
-%token INT TEXT VALUES OPENBR CLOSEBR
-%type <sval> NAME 
-// %type <ival> SELECT 
+%token INT TEXT VALUES OPENBR CLOSEBR TABLE
+%type <sval> NAME  item_name table_name 
+%type <ival> SELECT pair_init 
 %start statements 
 
 %% 
@@ -32,8 +33,8 @@ select_statement : SELECT item_names FROM table_name SEMICOLON {
 	}
 
 
-create_statement : CREATE table_name OPENBR pair_init_values CLOSEBR SEMICOLON { 
-		printf("found a create statement\n"); 
+create_statement : CREATE TABLE table_name OPENBR pair_init_values CLOSEBR SEMICOLON { 
+		create_table($3); 
 	}
 pair_init_values : pair_init { 
 	} 
@@ -41,11 +42,12 @@ pair_init_values : pair_init {
 	}
 
 pair_init : INT item_name { 
-		printf("found an INT item\n");
+		insert_parameter($2 , INT); 
 	} 
 	| TEXT item_name { 
-		printf("found a TEXT item\n");
+		insert_parameter($2 , TEXT);
 	}
+
 
 item_names : item_name { 
 
@@ -55,11 +57,11 @@ item_names : item_name {
 	}
 
 item_name : NAME { 
-		printf("found an item with name : %s\n" , yylval.sval); 
+		$$=$1; 
 	}
  
 table_name : NAME { 
-		printf("found table name : %s\n", yylval.sval); 
+		$$=$1;
 	} 
 %% 
 int main() { 

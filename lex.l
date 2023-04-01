@@ -11,6 +11,7 @@
 
 "select" { return SELECT; } 
 "create" { return CREATE; }
+"table"  { return TABLE; } 
 "insert" { return INSERT; } 
 "values" { return VALUES; }
 "int"    { return INT; }

@@ -6,7 +6,7 @@ fi
 yacc parser.y 
 lex lex.l
 
-clang -g -O0 lex.yy.c y.tab.c
+clang -g -O0 common.c lex.yy.c y.tab.c
 
 
 # test
