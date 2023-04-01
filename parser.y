@@ -11,7 +11,8 @@ int yyerror( const char* ) ;
 }
 
 %token SELECT FROM SEMICOLON NAME COMMA CREATE INSERT 
-%token INT TEXT VALUES OPENBR CLOSEBR TABLE
+%token INT TEXT VALUES OPENBR CLOSEBR TABLE TEXT_DATA 
+%token OPENPR CLOSEPR INTO  INT_DATA
 %type <sval> NAME  item_name table_name 
 %type <ival> SELECT pair_init 
 %start statements 
@@ -25,17 +26,34 @@ statements : single_statement  {
 single_statement : select_statement {
 	} 
 	| create_statement { 
+	} 
+	| insert_statement { 
 	}
 
 
 select_statement : SELECT item_names FROM table_name SEMICOLON { 
-		printf("found select statement\n"); 
 	}
 
 
 create_statement : CREATE TABLE table_name OPENBR pair_init_values CLOSEBR SEMICOLON { 
 		create_table($3); 
 	}
+
+insert_statement : INSERT INTO table_name VALUES OPENPR data_values CLOSEPR SEMICOLON { 
+	}
+
+data_values : data_value { 	
+	}
+	| data_values COMMA data_value { 
+	}
+
+
+data_value : INT_DATA  { 
+	}
+	| TEXT_DATA { 
+
+	}
+
 pair_init_values : pair_init { 
 	} 
 	| pair_init_values COMMA pair_init { 
