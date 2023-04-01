@@ -4,11 +4,12 @@ a.out.dSYM
 /* mac garbage */ 
 
 *.swp 
-
+Session.vim
 /* vim */ 
 
 /* yacc */ 
 y.tab.c
 y.tab.h
 lex.yy.c
+
 
