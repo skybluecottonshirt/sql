@@ -1,7 +1,7 @@
-select variable1, variable2 from table_name ;
-create table table_name { 
-	int value1 , 
-	text value2 
-}; 
-insert into table_name values ( "something",  1 ) ;
-
+create table user { text name, int age };
+insert into user values ( "shivang", 22 ) ; 
+insert into user values ( "oroz3x", 22 ) ; 
+insert into user values ( "jain", 22 ) ; 
+insert into user values ( "konda", 22 ) ; 
+insert into user values ( "matar", 22 ) ; 
+insert into user values ( "ishant", 23 ) ; 
