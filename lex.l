@@ -40,7 +40,7 @@
 	}
 
 ";"	{ return SEMICOLON; }
-. 	{} // ignore case 
+\n 	{ return NOTHING; } // ignore case 
 %%
 
 

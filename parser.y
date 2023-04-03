@@ -11,10 +11,10 @@ int yyerror( const char* ) ;
 }
 
 %token SELECT FROM SEMICOLON NAME COMMA CREATE INSERT 
-%token INT TEXT VALUES OPENBR CLOSEBR TABLE TEXT_DATA 
+%token INT TEXT VALUES OPENBR CLOSEBR TABLE TEXT_DATA  NOTHING
 %token OPENPR CLOSEPR INTO  INT_DATA
 %type <sval> NAME  item_name table_name  TEXT_DATA
-%type <ival> SELECT pair_init INT_DATA
+%type <ival> SELECT pair_init INT_DATA 
 %start statements 
 
 %% 
@@ -28,7 +28,10 @@ single_statement : select_statement {
 	| create_statement { 
 	} 
 	| insert_statement { 
+	} 
+	| NOTHING { 
 	}
+
 
 
 select_statement : SELECT item_names FROM table_name SEMICOLON { 
@@ -85,7 +88,9 @@ table_name : NAME {
 	} 
 %% 
 int main() { 
+	freopen("test.sql", "r", stdin);
 	yyparse(); 
+	print_all_table("user");
 	return 0; 
 }
 
