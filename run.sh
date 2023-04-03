@@ -7,8 +7,8 @@ fi
 # begin build 
 yacc parser.y 
 lex lex.l
-clang -g -O0 common.c lex.yy.c y.tab.c 2>/dev/null
+clang -g -O0 common.c lex.yy.c y.tab.c 
 
 
 # test
-./a.out < test.sql
+./a.out 
